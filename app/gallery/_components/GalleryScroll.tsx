@@ -20,7 +20,7 @@ import Image from "next/image";
 
 const images = [
   "/financial_aid_to_flood/fatf1.jpeg",
-  "/medical_camp_flood/IMG_2677.png",
+  "/medical_camp_flood/IMG_2677.webp",
   "/Flood_Project_2024/1.jpg",
   "/iftar_distribution-2023/File_001.png",
   "/rickshaw/rickshaw_1.jpeg",
