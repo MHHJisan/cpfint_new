@@ -35,11 +35,6 @@ const donationOptions = {
 
 const DonationPage = () => {
   const [isQrVisible, setIsQrVisible] = useState(false);
-
-  const handleZelle = () => {
-    setIsQrVisible(true);
-  };
-
   const [selectedCategory, setSelectedCategory] = useState(
     donationCategories[0]
   );
@@ -55,12 +50,10 @@ const DonationPage = () => {
 
   const handleProceed = async () => {
     const stripe = await stripePromise;
-    if (!stripe) {
+    if (!stripe)
       return alert("Stripe is not available. Please try again later.");
-    }
 
     const amount = customAmount ? parseFloat(customAmount) : selectedAmount;
-
     const response = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -76,78 +69,76 @@ const DonationPage = () => {
   };
 
   return (
-    <div>
+    <div className="p-4 sm:p-6 md:p-8 lg:p-10">
       <div className="w-full h-16 bg-[url('/img/blue-bg-pattern.png')] bg-cover bg-center flex items-center justify-center my-4">
-        <h1 className="text-3xl font-bold text-center text-white">
+        <h1 className="text-2xl sm:text-3xl font-bold text-white text-center">
           Make a donation for {selectedCategory}
         </h1>
       </div>
-      <div className="max-w-5xl mx-auto p-6 my-4 space-y-6">
-        <div className="grid grid-cols-3 gap-6">
+
+      <div className="max-w-5xl mx-auto space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Categories Section */}
-          <div className="col-span-1">
-            <div className="grid grid-cols-2 gap-4">
-              {donationCategories.map((category) => (
-                <div
-                  key={category}
-                  className={`p-4 rounded-lg cursor-pointer text-center text-white font-medium transition-all ${
-                    selectedCategory === category
-                      ? "bg-blue-600"
-                      : "bg-blue-400 hover:bg-blue-500"
-                  }`}
-                  onClick={() => setSelectedCategory(category)}
-                >
-                  {category}
-                </div>
-              ))}
-            </div>
+          <div className="md:col-span-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-1 gap-4">
+            {donationCategories.map((category) => (
+              <div
+                key={category}
+                className={`p-3 sm:p-4 rounded-lg cursor-pointer text-center text-white font-medium transition-all ${
+                  selectedCategory === category
+                    ? "bg-blue-600"
+                    : "bg-blue-400 hover:bg-blue-500"
+                }`}
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category}
+              </div>
+            ))}
           </div>
 
           {/* Donation Details Section */}
-          <div className="col-span-2">
+          <div className="md:col-span-2">
             <Card className="shadow-lg">
               <CardContent className="my-4">
                 <h2 className="text-lg font-semibold mb-4 text-gray-700">
                   Donation Details
                 </h2>
+
+                {/* Donation Type */}
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-600">
                     Donation Type
                   </label>
                   <RadioGroup
                     value={donationType}
-                    onValueChange={(
-                      value: "one-time" | "monthly" | "yearly"
-                    ) => {
+                    onValueChange={(value) => {
                       setDonationType(value);
-                      setSelectedAmount(donationOptions[value][0]); // Update selectedAmount dynamically
+                      setSelectedAmount(donationOptions[value][0]);
                     }}
-                    className="flex space-x-4 mt-2"
+                    className="flex flex-wrap gap-4 mt-2"
                   >
-                    <RadioGroupItem value="one-time" id="one-time" />
-                    <label htmlFor="one-time">One Time</label>
-                    <RadioGroupItem value="monthly" id="monthly" />
-                    <label htmlFor="monthly">Monthly</label>
-                    <RadioGroupItem value="yearly" id="yearly" />
-                    <label htmlFor="yearly">Yearly</label>
+                    {Object.keys(donationOptions).map((type) => (
+                      <label key={type} className="flex items-center space-x-2">
+                        <RadioGroupItem value={type} id={type} />
+                        <span>
+                          {type.charAt(0).toUpperCase() + type.slice(1)}
+                        </span>
+                      </label>
+                    ))}
                   </RadioGroup>
                 </div>
+
+                {/* Donation Amount */}
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-600">
                     Amount
                   </label>
-                  <div className="grid grid-cols-3 gap-2 mt-2">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-2">
                     {currentDonationAmounts.map((amount) => (
                       <Button
                         key={amount}
                         variant={
                           selectedAmount === amount ? "default" : "outline"
                         }
-                        className={`py-2 ${
-                          selectedAmount === amount
-                            ? "bg-blue-600 text-white"
-                            : "border border-gray-300"
-                        }`}
                         onClick={() => {
                           setSelectedAmount(amount);
                           setCustomAmount("");
@@ -157,7 +148,7 @@ const DonationPage = () => {
                       </Button>
                     ))}
                     <Input
-                      className="col-span-3 mt-2 p-2 border border-gray-300 rounded"
+                      className="col-span-2 sm:col-span-3 mt-2 p-2 border border-gray-300 rounded"
                       placeholder="Other Amount"
                       type="number"
                       value={customAmount}
@@ -166,69 +157,50 @@ const DonationPage = () => {
                     />
                   </div>
                 </div>
-                <div className="flex justify-between mt-6">
-                  <Button
-                    variant="outline"
-                    className="px-6 py-2 border border-gray-400 text-gray-700 hover:bg-red-600"
-                  >
-                    Back
-                  </Button>
-                  {/* Proceed Button */}
 
+                {/* Payment Options */}
+                <div className="flex flex-wrap justify-between mt-6 gap-4">
                   {donationType === "one-time" && (
-                    <div className="flex justify-end">
-                      <Button
-                        onClick={handleZelle}
-                        className="bg-orange-400 text-white"
-                      >
-                        Pay With Zelle
-                      </Button>
-                    </div>
-                  )}
-
-                  {/* QR Code Modal */}
-                  {isQrVisible && donationType === "one-time" && (
-                    <Dialog open={isQrVisible} onOpenChange={setIsQrVisible}>
-                      <DialogOverlay className="fixed inset-0 bg-black bg-opacity-50" />
-                      <DialogTitle>CPFINT.ORG</DialogTitle>
-                      <DialogContent className="bg-white p-6 rounded-lg shadow-lg w-[350px] mx-auto mt-20 text-center">
-                        <h2 className="text-lg font-semibold mb-4">
-                          Scan to Pay with Zelle
-                        </h2>
-                        <AspectRatio ratio={340 / 470}>
-                          <Image
-                            src="/zelle/zelle.png" // Replace with your actual QR code image
-                            alt="Zelle QR Code"
-                            className="w-40 h-40 mx-auto"
-                            layout="fill"
-                            loading="lazy"
-                          />
-                        </AspectRatio>
-                        <h4>
-                          Or Gmail -{" "}
-                          <span className="text-blue-600">
-                            cpfint20@gmail.com
-                          </span>
-                        </h4>
-                        <Button
-                          className="mt-4 bg-gray-600 text-white"
-                          onClick={() => setIsQrVisible(false)}
-                        >
-                          Close
-                        </Button>
-                      </DialogContent>
-                    </Dialog>
-                  )}
-
-                  <div className="flex justify-end">
                     <Button
-                      onClick={handleProceed}
-                      className="bg-green-600 text-white"
+                      onClick={() => setIsQrVisible(true)}
+                      className="bg-orange-400 text-white"
                     >
-                      Pay With any card
+                      Pay With Zelle
                     </Button>
-                  </div>
+                  )}
+                  <Button
+                    onClick={handleProceed}
+                    className="bg-green-600 text-white"
+                  >
+                    Pay With any card
+                  </Button>
                 </div>
+
+                {/* QR Code Modal */}
+                {isQrVisible && donationType === "one-time" && (
+                  <Dialog open={isQrVisible} onOpenChange={setIsQrVisible}>
+                    <DialogOverlay className="fixed inset-0 bg-black bg-opacity-50" />
+                    <DialogContent className="bg-white p-6 rounded-lg shadow-lg w-[350px] mx-auto text-center">
+                      <h2 className="text-lg font-semibold">
+                        Scan to Pay with Zelle
+                      </h2>
+                      <AspectRatio ratio={1}>
+                        <Image
+                          src="/zelle/zelle.png"
+                          alt="Zelle QR Code"
+                          layout="fill"
+                          loading="lazy"
+                        />
+                      </AspectRatio>
+                      <Button
+                        className="mt-4 bg-gray-600 text-white"
+                        onClick={() => setIsQrVisible(false)}
+                      >
+                        Close
+                      </Button>
+                    </DialogContent>
+                  </Dialog>
+                )}
               </CardContent>
             </Card>
           </div>
