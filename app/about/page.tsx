@@ -6,6 +6,7 @@ import { SectionHeader } from "../_components/Homepage/sectionHeader";
 import { Footer } from "../_components/footer";
 import { Button } from "@/components/ui/button";
 import NumbersSection from "./_components/NumberSection";
+import { WhoRweDetails } from "./_components/WhoRweDetails";
 
 export default function About() {
   return (
@@ -19,37 +20,11 @@ export default function About() {
 
       <SectionHeader title="Who we are?" />
 
-      <div className="w-full min-h-full bg-[url('/img/blue-bg-pattern.png')] flex flex-row mt-8 py-8 px-8 gap-8">
-        <div
-          className="w-full p-3 bg-cover bg-center text-[rgba(0,0,0,0.65)] 
-        text-[17px] leading-[31.5714px] transition-all duration-300 ease-in-out"
-        >
-          <p className="font-bold text-[36px] leading-[46.8px] text-white m-0 p-0 ">
-            We are a team of change-makers who believe that every helping hand
-            can make a difference and create a better future for all.
-          </p>
-        </div>
+      <WhoRweDetails />
 
-        <div className="flex flex-col gap-6">
-          <p className="text-white">
-            Driven by the spirit of giving, we, a group of individuals from
-            Companigonj, Noakhali, find fulfillment in bringing smiles to those
-            in need. Our roots and the generosity we've received from our nation
-            and society call us back to give back. This is the driving force
-            behind our efforts to make a positive impact on the world around us.
-          </p>
-          <p className="text-white">
-            We are empowering rural communities through self-employment,
-            single-mother aid, and educational assistance. We're always looking
-            for the best, most sustainable, and impactful ways to help those in
-            need.
-          </p>
-        </div>
-      </div>
-
-      <div className="w-full flex flex-row p-12 rounded-lg mx-[120px] ">
+      <div className="w-full flex flex-col lg:flex-row p-12 rounded-lg mx-4 lg:mx-[120px]">
         {/* First Image Section */}
-        <div className="w-1/2 flex justify-center">
+        <div className="w-full lg:w-1/2 flex justify-center mb-6 lg:mb-0">
           <img
             src="/iftar_distribution-2023/File_017.png"
             alt="Iftar Distribution"
@@ -58,7 +33,7 @@ export default function About() {
         </div>
 
         {/* Second Image Section */}
-        <div className="w-1/2 flex justify-center">
+        <div className="w-full lg:w-1/2 flex justify-center">
           <img
             src="/iftar_distribution-2023/File_039.png"
             alt="Iftar Distribution"
@@ -81,15 +56,15 @@ export default function About() {
       <SectionHeader title="ROOTED IN COMMUNITY, DRIVEN BY IMPACT" />
 
       <div
-        className="w-full flex flex-row p-12 my-8 rounded-lg bg-[url('/img/blue-bg-pattern.png')] bg-cover bg-center text-[rgba(0,0,0,0.65)] 
-        text-[17px] leading-[31.5714px] transition-all duration-300 ease-in-out"
+        className="w-full flex flex-col lg:flex-row p-6 md:p-12 my-8 rounded-lg bg-[url('/img/blue-bg-pattern.png')] bg-cover bg-center text-[rgba(0,0,0,0.65)] 
+  text-[17px] leading-[31.5714px] transition-all duration-300 ease-in-out"
       >
         {/* First Image Section */}
-        <div className="w-1/2 flex flex-col justify-center gap-8 text-white">
-          <h2 className="text-yellow-500 text-3xl font-sans font-extrabold">
+        <div className="w-full lg:w-1/2 flex flex-col justify-center gap-6 md:gap-8 text-white px-4 md:px-8">
+          <h2 className="text-yellow-500 text-2xl md:text-3xl font-sans font-extrabold">
             Our Mission
           </h2>
-          <p className="">
+          <p>
             Our mission is to create lasting change that empowers communities
             with skills, resources, and opportunities to thrive for generations
             to come.
@@ -103,8 +78,8 @@ export default function About() {
         </div>
 
         {/* Second Image Section */}
-        <div className="w-1/2 flex flex-col justify-center gap-8 text-white">
-          <h2 className="text-yellow-500 text-3xl font-sans font-extrabold">
+        <div className="w-full lg:w-1/2 flex flex-col justify-center gap-6 md:gap-8 text-white px-4 md:px-8 mt-8 lg:mt-0">
+          <h2 className="text-yellow-500 text-2xl md:text-3xl font-sans font-extrabold">
             Our Vision
           </h2>
           <p className="font-roboto">

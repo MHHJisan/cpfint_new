@@ -1,11 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-<link
-  href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-  rel="stylesheet"
-></link>;
-
 interface CounterProps {
   end: number;
   prefix?: string;
@@ -34,7 +29,7 @@ const Counter: React.FC<CounterProps> = ({ end, prefix = "", suffix = "" }) => {
 
   return (
     <div>
-      <p className="text-6xl font-bold mt-2 inline-block">
+      <p className="text-5xl md:text-6xl font-bold mt-2 inline-block">
         {prefix}
         {count.toLocaleString()}
         {suffix}
@@ -45,31 +40,35 @@ const Counter: React.FC<CounterProps> = ({ end, prefix = "", suffix = "" }) => {
 
 const NumbersSection = () => {
   return (
-    <section className="bg-gray-100 py-12">
-      <div className="w-1/2 flex flex-row items-center px-6">
-        <div className="flex flex-col justify-center text-left mx-auto mb-10">
-          <h3 className="text-2xl font-bold font-roboto">
+    <section className="bg-gray-100 py-12 px-4 md:px-12 lg:px-20">
+      <div className="flex flex-col lg:flex-row items-center lg:items-start lg:space-x-16">
+        <div className="lg:w-1/3 flex flex-col justify-center text-left mx-auto lg:mx-0 mb-10 lg:mb-0">
+          <h3 className="text-2xl md:text-3xl font-bold font-roboto">
             Our Numbers That Speak
           </h3>
-          <p className="font-roboto text-gray-600 mt-2">
+          <p className="font-roboto text-gray-600 mt-2 text-base md:text-lg">
             Driven by numbers, fueled by passion, we’re making a difference
             every day.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 shadow-none border-none gap-8 text-left">
-          <div className="bg-transparent  p-6  shadow-none border-none rounded-lg">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left w-full lg:w-2/3">
+          <div className="bg-transparent p-6 rounded-lg">
             <Counter end={550} suffix="+" />
-            <h4 className="text-xl font-roboto font-bold">Members Worldwide</h4>
+            <h4 className="text-lg md:text-xl font-roboto font-bold">
+              Members Worldwide
+            </h4>
             <div className="w-full h-0.5 bg-[#fb7e30] mt-4"></div>
           </div>
-          <div className="bg-transparent p-6 shadow-none rounded-lg">
+          <div className="bg-transparent p-6 rounded-lg">
             <Counter end={3000} suffix="+" />
-            <h4 className="text-xl font-extrabold">People Benefitted</h4>
+            <h4 className="text-lg md:text-xl font-extrabold">
+              People Benefitted
+            </h4>
             <div className="w-full h-0.5 bg-[#fb7e30] mt-4"></div>
           </div>
-          <div className="bg-transparent p-6 shadow-none rounded-lg">
+          <div className="bg-transparent p-6 rounded-lg">
             <Counter end={20000} prefix="$" suffix="+" />
-            <h4 className="text-xl font-semibold">Funds Raised</h4>
+            <h4 className="text-lg md:text-xl font-semibold">Funds Raised</h4>
             <div className="w-full h-0.5 bg-[#fb7e30] mt-4"></div>
           </div>
         </div>
