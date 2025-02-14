@@ -67,7 +67,7 @@ const faitf = [
 const medcial_camp_flood = [
   { src: "/medical_camp_flood/banner.jpg", alt: "banner" },
 
-  { src: "/medical_camp_flood/IMG_2680.wwebp", alt: "2680" },
+  { src: "/medical_camp_flood/IMG_2680.webp", alt: "2680" },
   { src: "/medical_camp_flood/IMG_2681.webp", alt: "2681" },
 
   { src: "/medical_camp_flood/IMG_2702.webp", alt: "2702" },

@@ -174,17 +174,20 @@ const DonationPage = () => {
                     Back
                   </Button>
                   {/* Proceed Button */}
-                  <div className="flex justify-end">
-                    <Button
-                      onClick={handleZelle}
-                      className="bg-orange-400 text-white"
-                    >
-                      Pay With Zelle
-                    </Button>
-                  </div>
+
+                  {donationType === "one-time" && (
+                    <div className="flex justify-end">
+                      <Button
+                        onClick={handleZelle}
+                        className="bg-orange-400 text-white"
+                      >
+                        Pay With Zelle
+                      </Button>
+                    </div>
+                  )}
 
                   {/* QR Code Modal */}
-                  {isQrVisible && (
+                  {isQrVisible && donationType === "one-time" && (
                     <Dialog open={isQrVisible} onOpenChange={setIsQrVisible}>
                       <DialogOverlay className="fixed inset-0 bg-black bg-opacity-50" />
                       <DialogTitle>CPFINT.ORG</DialogTitle>
