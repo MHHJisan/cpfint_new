@@ -31,7 +31,7 @@ const donationOptions = {
   "one-time": [10, 20, 30, 50, 100],
   monthly: [20, 30, 50, 100],
   yearly: [500, 1000, 3000, 5000],
-};
+} as const; // Ensures TypeScript recognizes fixed keys
 
 const DonationPage = () => {
   const [isQrVisible, setIsQrVisible] = useState(false);
@@ -41,6 +41,7 @@ const DonationPage = () => {
   const [donationType, setDonationType] = useState<
     "one-time" | "monthly" | "yearly"
   >("one-time");
+
   const [selectedAmount, setSelectedAmount] = useState<number | null>(
     donationOptions["one-time"][0]
   );
@@ -111,10 +112,17 @@ const DonationPage = () => {
                   <RadioGroup
                     value={donationType}
                     onValueChange={(value) => {
-                      setDonationType(value);
-                      setSelectedAmount(donationOptions[value][0]);
+                      if (["one-time", "monthly", "yearly"].includes(value)) {
+                        setDonationType(
+                          value as "one-time" | "monthly" | "yearly"
+                        ); // Type assertion
+                        setSelectedAmount(
+                          donationOptions[
+                            value as keyof typeof donationOptions
+                          ][0]
+                        );
+                      }
                     }}
-                    className="flex flex-wrap gap-4 mt-2"
                   >
                     {Object.keys(donationOptions).map((type) => (
                       <label key={type} className="flex items-center space-x-2">

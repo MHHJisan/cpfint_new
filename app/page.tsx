@@ -99,9 +99,9 @@ export default function Home() {
     <div className="w-full flex flex-col items-center min-h-screen gap-4 font-[family-name:var(--font-geist-sans)]">
       <Header />
       <MenuBar />
-      <div className="w-full">
-        <Herosection />
-      </div>
+      {/* <div className="w-full"> */}
+      <Herosection />
+      {/* </div> */}
       <SectionHeader title="DRY FOOD DISTRIBUTION AUGUST 2024" />
       <SectionTable />
 
