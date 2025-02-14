@@ -4,37 +4,38 @@ const HopeSection = () => {
   return (
     <div className="w-full">
       <header
-        className="w-full p-3 bg-[url('/img/blue-bg-pattern.png')] bg-cover bg-center text-[rgba(0,0,0,0.65)] 
-        text-[17px] leading-[31.5714px] transition-all duration-300 ease-in-out"
+        className="w-full p-4 sm:p-6 lg:p-8 bg-[url('/img/blue-bg-pattern.png')] bg-cover bg-center text-[rgba(0,0,0,0.65)] 
+        text-lg leading-[1.7] transition-all duration-300 ease-in-out"
       >
-        <div className="w-full flex flex-row  p-6 rounded-lg mx-[120px]">
-          <div className="w-full max-w-4xl flex flex-col text-left justify-center  space-y-4">
+        <div className="w-full flex flex-col lg:flex-row items-center lg:items-start p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
+          {/* Text Section */}
+          <div className="w-full lg:w-1/2 flex flex-col text-center lg:text-left justify-center space-y-4 px-4">
             {/* Heading */}
-            <h2 className="text-[60px] font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white">
               IGNITING SPARKS OF HOPE
             </h2>
 
             {/* Description */}
-            <h6 className="text-[30px] font-bold font-roboto tracking-widest text-white mb-2">
+            <h6 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-roboto tracking-wide text-white">
               We are focused on improving the lives of underprivileged rural
-              communities in remote areas through the sustainable livelihood
-              approach to poverty reduction and education assistance programs.
+              communities in remote areas through sustainable livelihood
+              approaches and education assistance programs.
             </h6>
 
             {/* Paragraph */}
-            <p className="text-base text-slate-300 mb-6">
-              We are focused on improving the lives of underprivileged rural
-              communities in remote areas through the sustainable livelihood
-              approach to poverty reduction and education assistance programs.
+            <p className="text-sm sm:text-base text-slate-300">
+              Our goal is to uplift rural communities by addressing poverty
+              through long-term, sustainable solutions.
             </p>
           </div>
 
           {/* Image Section */}
-          <div className="w-full max-w-lg flex justify-center">
+          <div className="w-full lg:w-1/2 flex justify-center mt-6 lg:mt-0">
             <img
-              src="https://cpfint.org/wp-content/uploads/2023/11/iftar_distribution9.jpg"
+              src="/iftar_distribution-2023/File_011.png"
               alt="Iftar Distribution"
-              className="h-[500px] rounded-tl-[120px] rounded-br-[120px] shadow-lg w-full"
+              className="w-full max-w-[400px] sm:max-w-[500px] h-auto rounded-tl-[80px] sm:rounded-tl-[120px] 
+              rounded-br-[80px] sm:rounded-br-[120px] shadow-lg"
             />
           </div>
         </div>

@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
-// import ReCAPTCHA from "react-google-recaptcha";
+import { useState } from "react";
 
 export default function JoinTheMovement() {
   const [formData, setFormData] = useState({
@@ -10,23 +9,19 @@ export default function JoinTheMovement() {
     message: "",
   });
 
-  // const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
-  // const recaptchaRef = useRef<ReCAPTCHA>(null);
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target as HTMLInputElement | HTMLTextAreaElement;
+    const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Add formType to the data
     const formDataWithType = {
       ...formData,
-      formType: "joinTheMovement", // Or dynamically assign this based on your form
+      formType: "joinTheMovement",
     };
 
     try {
@@ -36,10 +31,7 @@ export default function JoinTheMovement() {
         body: JSON.stringify(formDataWithType),
       });
 
-      // Make sure the response is valid and parse it
       const data = await response.json();
-
-      console.log("Response data:", data);
 
       if (response.ok) {
         alert("Form submitted successfully!");
@@ -54,22 +46,25 @@ export default function JoinTheMovement() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center p-6 bg-orange-500 rounded-lg">
-      <h1 className="text-6xl font-bold mb-4">JOIN THE MOVEMENT</h1>
+    <div className="w-full flex flex-col items-center p-6 sm:p-8 md:p-10 bg-orange-500 rounded-lg">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-center">
+        JOIN THE MOVEMENT
+      </h1>
+
       <form
         onSubmit={handleSubmit}
-        className="w-full  bg-transparent p-6 px-36 shadow-none rounded-lg"
+        className="w-full max-w-lg sm:max-w-xl md:max-w-2xl bg-transparent p-4 sm:p-6 shadow-none rounded-lg"
       >
         <div className="mb-4">
-          <label className="block text-base font-medium mb-1" htmlFor="name">
+          <label className="block text-lg font-medium mb-1" htmlFor="name">
             Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
             id="name"
             name="name"
-            className="w-full h-14 p-2 border"
-            placeholder="Enter your name here."
+            className="w-full h-12 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-400"
+            placeholder="Enter your name here"
             value={formData.name}
             onChange={handleChange}
             required
@@ -77,15 +72,15 @@ export default function JoinTheMovement() {
         </div>
 
         <div className="mb-4">
-          <label className="block text-base font-medium mb-1" htmlFor="email">
+          <label className="block text-lg font-medium mb-1" htmlFor="email">
             Email <span className="text-red-500">*</span>
           </label>
           <input
             type="email"
             id="email"
             name="email"
-            className="w-full h-14 p-2 border"
-            placeholder="Enter your email here."
+            className="w-full h-12 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-400"
+            placeholder="Enter your email here"
             value={formData.email}
             onChange={handleChange}
             required
@@ -93,32 +88,24 @@ export default function JoinTheMovement() {
         </div>
 
         <div className="mb-4">
-          <label className="block text-base font-medium mb-1" htmlFor="message">
+          <label className="block text-lg font-medium mb-1" htmlFor="message">
             Message <span className="text-red-500">*</span>
           </label>
           <textarea
             id="message"
             name="message"
-            className="w-full h-24 p-2 border"
-            placeholder="Enter your message here."
+            className="w-full h-28 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-400"
+            placeholder="Enter your message here"
             value={formData.message}
             onChange={handleChange}
             required
           />
         </div>
 
-        {/* reCAPTCHA */}
-        {/* <div className="mb-4 flex justify-center">
-          <ReCAPTCHA
-            sitekey="6Lc7k9MqAAAAABb9vy9kqPPYjTFVApY9K2TJDtDd"
-            onChange={(value) => setRecaptchaValue(value)}
-            ref={recaptchaRef}
-          />
-        </div> */}
-
         <button
           type="submit"
-          className="w-32 h-12 bg-orange-50 text-red-950 p-2 hover:bg-blue-600 tracking-wider font-bold"
+          className="w-full sm:w-40 h-12 bg-orange-50 text-red-950 font-bold tracking-wide rounded-md 
+            hover:bg-blue-400 transition-all duration-300"
         >
           SUBMIT
         </button>

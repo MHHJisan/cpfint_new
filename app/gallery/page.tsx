@@ -199,10 +199,6 @@ const floodProject = [
     alt: "10",
   },
   {
-    src: "/Flood_Project_2024/11.jpg",
-    alt: "11",
-  },
-  {
     src: "/Flood_Project_2024/12.jpg",
     alt: "12",
   },
