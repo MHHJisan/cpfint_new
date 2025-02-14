@@ -114,7 +114,7 @@ const medcial_camp_flood = [
   { src: "/medical_camp_flood/IMG_2829.webp", alt: "2829" },
   { src: "/medical_camp_flood/IMG_2830.webp", alt: "2830" },
   { src: "/medical_camp_flood/IMG_2831.webp", alt: "2831" },
-  { src: "/medical_camp_flood/IMG_2832.png", alt: "2832" },
+  { src: "/medical_camp_flood/IMG_2832.webp", alt: "2832" },
   { src: "/medical_camp_flood/IMG_2833.webp", alt: "2833" },
   { src: "/medical_camp_flood/IMG_2834.webp", alt: "2834" },
   { src: "/medical_camp_flood/IMG_2835.webp", alt: "2835" },
@@ -139,7 +139,7 @@ const medcial_camp_flood = [
   { src: "/medical_camp_flood/IMG_2856.webp", alt: "2856" },
   { src: "/medical_camp_flood/IMG_2857.webp", alt: "2857" },
   { src: "/medical_camp_flood/IMG_2858.webp", alt: "2858" },
-  { src: "/medical_camp_flood/IMG_2859.wepb", alt: "2859" },
+  { src: "/medical_camp_flood/IMG_2859.webp", alt: "2859" },
 
   { src: "/medical_camp_flood/IMG_2869.webp", alt: "2869" },
   { src: "/medical_camp_flood/IMG_2870.webp", alt: "2870" },

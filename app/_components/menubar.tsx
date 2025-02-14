@@ -55,7 +55,7 @@ export function MenuBar() {
                 <a
                   href={`/${item.toLowerCase()}`}
                   className={cn(
-                    "text-[18px] px-4 py-2",
+                    "text-[18px] font-extrabold px-4 py-2",
                     currentPath === `/${item.toLowerCase()}` && "text-[#FF3951]"
                   )}
                 >
