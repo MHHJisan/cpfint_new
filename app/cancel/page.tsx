@@ -25,7 +25,7 @@ const CancelPage = () => {
           </Button>
           <Button
             className="bg-gray-400 text-white px-6 py-2"
-            onClick={() => router.push("/donate")}
+            onClick={() => router.push("/donation")}
           >
             Try Again
           </Button>
