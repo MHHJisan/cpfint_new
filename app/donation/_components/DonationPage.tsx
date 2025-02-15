@@ -34,6 +34,15 @@ const donationOptions = {
 } as const; // Ensures TypeScript recognizes fixed keys
 
 const DonationPage = () => {
+  const email = "cpfint20@gmail.com";
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000); // Reset message after 2 seconds
+  };
+
   const [isQrVisible, setIsQrVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(
     donationCategories[0]
@@ -195,10 +204,22 @@ const DonationPage = () => {
                       </h2>
                       <h2 className="text-lg font-semibold">
                         Email:{" "}
-                        <span className="font-bold text-[#3d0cc3]">
-                          cpfint20@gmail.com
-                        </span>
+                        <a
+                          href={`mailto:${email}`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            copyToClipboard();
+                          }}
+                          className="font-bold text-[#3d0cc3] cursor-pointer hover:underline"
+                        >
+                          {email}
+                        </a>
                       </h2>
+                      {copied && (
+                        <span className="absolute left-0 mt-1 text-sm text-green-600">
+                          Copied!
+                        </span>
+                      )}
                       <AspectRatio ratio={1}>
                         <Image
                           src="/zelle/zelle.png"
