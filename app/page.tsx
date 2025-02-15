@@ -10,7 +10,7 @@ import DonationPrograms from "./_components/Homepage/donationPrograms";
 import OurCampaigns from "./_components/Homepage/campaignsPrograms";
 import { Button } from "@/components/ui/button";
 import HopeSection from "./_components/Homepage/hopeSection";
-import SlideShow from "./_components/Homepage/slideShow";
+// import SlideShow from "./_components/Homepage/slideShow";
 import JoinTheMovementForm from "./_components/Homepage/joinTheMovement";
 
 const financial_aid_to_flood = [
@@ -171,7 +171,7 @@ Our dedicated volunteer team collaborated with the local administration and gove
         sectionId="RICKSHAW"
       /> */}
 
-      <div className="w-full min-h-full">
+      <div className="w-full min-h-full my-8">
         <header
           className="w-full p-3 bg-[url('/img/blue-bg-pattern.png')] bg-cover bg-center text-[rgba(0,0,0,0.65)] 
         text-[17px] leading-[31.5714px] transition-all duration-300 ease-in-out"
@@ -194,7 +194,7 @@ Our dedicated volunteer team collaborated with the local administration and gove
         </header>
 
         <OurCampaigns />
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center py-8">
           <Button
             asChild
             className="bg-[#FF3951] text-white font-['Poppins'] font-bold text-[14px] leading-[14px] uppercase tracking-[10px] px-[35px] py-[17px] rounded-[10px] hover:bg-[#FF3951]/90"

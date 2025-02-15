@@ -168,6 +168,12 @@ const DonationPage = () => {
 
                 {/* Payment Options */}
                 <div className="flex flex-wrap justify-between mt-6 gap-4">
+                  <Button
+                    onClick={handleProceed}
+                    className="bg-green-600 text-white"
+                  >
+                    Pay With any card
+                  </Button>
                   {donationType === "one-time" && (
                     <Button
                       onClick={() => setIsQrVisible(true)}
@@ -176,21 +182,22 @@ const DonationPage = () => {
                       Pay With Zelle
                     </Button>
                   )}
-                  <Button
-                    onClick={handleProceed}
-                    className="bg-green-600 text-white"
-                  >
-                    Pay With any card
-                  </Button>
                 </div>
 
                 {/* QR Code Modal */}
                 {isQrVisible && donationType === "one-time" && (
                   <Dialog open={isQrVisible} onOpenChange={setIsQrVisible}>
                     <DialogOverlay className="fixed inset-0 bg-black bg-opacity-50" />
+                    <DialogTitle>CPF</DialogTitle>
                     <DialogContent className="bg-white p-6 rounded-lg shadow-lg w-[350px] mx-auto text-center">
                       <h2 className="text-lg font-semibold">
                         Scan to Pay with Zelle
+                      </h2>
+                      <h2 className="text-lg font-semibold">
+                        Email:{" "}
+                        <span className="font-bold text-[#3d0cc3]">
+                          cpfint20@gmail.com
+                        </span>
                       </h2>
                       <AspectRatio ratio={1}>
                         <Image
