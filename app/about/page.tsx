@@ -10,7 +10,7 @@ import { WhoRweDetails } from "./_components/WhoRweDetails";
 
 export default function About() {
   return (
-    <div>
+    <div className="font-[family-name:var(--font-geist-sans)]">
       <Header />
       <MenuBar />
 

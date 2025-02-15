@@ -8,7 +8,7 @@ import ContactSection from "./_components/ContactSection";
 
 export default function Contact() {
   return (
-    <div>
+    <div className="font-[family-name:var(--font-geist-sans)]">
       <Header />
       <MenuBar />
 

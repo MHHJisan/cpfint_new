@@ -617,7 +617,7 @@ const general = [
 
 export default function Gallery() {
   return (
-    <div>
+    <div className="font-[family-name:var(--font-geist-sans)]">
       {" "}
       {/* <ImageField images={images} /> */}
       <Header />

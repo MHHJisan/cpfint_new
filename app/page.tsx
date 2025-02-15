@@ -96,7 +96,7 @@ const medicalImages = [
 
 export default function Home() {
   return (
-    <div className="w-full flex flex-col items-center min-h-screen gap-4 font-[family-name:var(--font-geist-sans)]">
+    <div className="w-full flex flex-col items-center min-h-screen gap-0 font-[family-name:var(--font-geist-sans)]">
       <Header />
       <MenuBar />
       {/* <div className="w-full"> */}
