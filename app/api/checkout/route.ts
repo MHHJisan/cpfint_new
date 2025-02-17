@@ -48,7 +48,8 @@ export async function POST(req: Request) {
         unit_amount: amount * 100,
         currency: "usd",
         recurring: {
-          interval: type === "monthly" ? "month" : "year",
+          interval:
+            type === "weekly" ? "week" : type === "monthly" ? "month" : "year",
         },
         product: product.id,
       });
