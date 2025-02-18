@@ -10,6 +10,14 @@ export async function POST(req: NextRequest) {
     const { name, lastName, email, phone, address, roles, message } =
       await req.json();
 
+    // Ensure roles is always a properly formatted string
+    const formattedRoles =
+      typeof roles === "string"
+        ? roles
+        : Array.isArray(roles)
+        ? roles.join(", ")
+        : "No role selected";
+
     // Validate required fields
     if (
       !name ||
@@ -17,7 +25,7 @@ export async function POST(req: NextRequest) {
       !email ||
       !phone ||
       !address ||
-      !roles.length ||
+      !roles ||
       !message
     ) {
       return NextResponse.json(
@@ -35,8 +43,8 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Email subject based on selected role
-    const subject = `New Application for ${roles.join(" & ")}`;
+    // Email subject
+    const subject = `New Application for ${formattedRoles}`;
 
     // Email options
     const mailOptions = {
@@ -48,7 +56,7 @@ export async function POST(req: NextRequest) {
       Email: ${email}\n
       Phone: ${phone}\n
       Address: ${address}\n
-      Applying for: ${roles.join(", ")}\n
+      Applying for: ${formattedRoles}\n
       Message: ${message}`,
       html: `
         <h2>New Application Received</h2>
@@ -56,7 +64,7 @@ export async function POST(req: NextRequest) {
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone}</p>
         <p><strong>Address:</strong> ${address}</p>
-        <p><strong>Applying for:</strong> ${roles.join(", ")}</p>
+        <p><strong>Applying for:</strong> ${formattedRoles}</p>
         <p><strong>Message:</strong> ${message}</p>
       `,
     };
