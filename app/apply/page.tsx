@@ -110,7 +110,7 @@ export default function Apply() {
                   type="number"
                   name="phone"
                   placeholder="Phone Number"
-                  value={formData.email}
+                  value={formData.phone}
                   onChange={handleChange}
                   className="h-12 w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
