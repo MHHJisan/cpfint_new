@@ -1,12 +1,5 @@
 "use client";
-import {
-  Locate,
-  LocateFixed,
-  LocateFixedIcon,
-  Mail,
-  MapPin,
-  Phone,
-} from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import React, { useState, ChangeEvent, FormEvent } from "react";
 
 const ContactSection = () => {
