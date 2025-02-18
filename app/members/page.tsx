@@ -103,7 +103,7 @@ export default function MemberList() {
               : "bg-gray-200 text-black"
           } hover:bg-yellow-500`}
         >
-          Volunteer Members
+          Volunteers
         </Button>
       </div>
 
