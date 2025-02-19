@@ -34,26 +34,26 @@ const members = [
 
 const exMembers = [
   {
-    name: "John Doe",
+    name: "",
     location: "London, UK",
-    designation: "Former Treasurer",
+    designation: "Advisor",
   },
   {
-    name: "Jane Smith",
+    name: "",
     location: "Berlin, Germany",
-    designation: "Former Secretary",
+    designation: "Member of Trustee Board",
   },
 ];
 
 const volunteerMembers = [
   {
-    name: "Alice Brown",
-    location: "Sydney, Australia",
+    name: "",
+    location: "",
     designation: "Volunteer Coordinator",
   },
   {
-    name: "Bob Green",
-    location: "Toronto, Canada",
+    name: "",
+    location: "",
     designation: "Event Organizer",
   },
 ];
