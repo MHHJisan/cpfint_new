@@ -15,15 +15,11 @@ import { useRouter } from "next/navigation";
 import { Footer } from "../_components/footer";
 
 const members = [
-  {
-    name: "Fakru Uddin",
-    location: "Texa, USA",
-    designation: "President",
-  },
+  { name: "Fakru Uddin", location: "Texas, USA", designation: "President" },
   {
     name: "Showkat Hayat Khan Biplob",
     location: "Paris, France",
-    designation: "Vice President ",
+    designation: "Vice President",
   },
   {
     name: "Abdul Qayum Mamun",
@@ -33,11 +29,7 @@ const members = [
 ];
 
 const exMembers = [
-  {
-    name: "",
-    location: "London, UK",
-    designation: "Advisor",
-  },
+  { name: "", location: "London, UK", designation: "Advisor" },
   {
     name: "",
     location: "Berlin, Germany",
@@ -46,16 +38,8 @@ const exMembers = [
 ];
 
 const volunteerMembers = [
-  {
-    name: "",
-    location: "",
-    designation: "Volunteer Coordinator",
-  },
-  {
-    name: "",
-    location: "",
-    designation: "Event Organizer",
-  },
+  { name: "", location: "", designation: "Volunteer Coordinator" },
+  { name: "", location: "", designation: "Event Organizer" },
 ];
 
 export default function MemberList() {
@@ -74,7 +58,8 @@ export default function MemberList() {
       <Header />
       <MenuBar />
 
-      <div className="flex space-x-4 my-6">
+      {/* Button Group */}
+      <div className="flex flex-wrap justify-center gap-4 my-6 px-4">
         <Button
           onClick={() => setSelectedCategory("active")}
           className={`px-4 py-2 w-40 h-12 font-semibold border rounded ${
@@ -93,7 +78,7 @@ export default function MemberList() {
               : "bg-gray-200 text-black"
           } hover:bg-yellow-500`}
         >
-          Advisory Committee
+          Trustee Board
         </Button>
         <Button
           onClick={() => setSelectedCategory("volunteer")}
@@ -107,6 +92,7 @@ export default function MemberList() {
         </Button>
       </div>
 
+      {/* Apply Button */}
       <div className="my-2">
         <Button
           onClick={() => router.push("/apply")}
@@ -116,8 +102,9 @@ export default function MemberList() {
         </Button>
       </div>
 
-      <div className="w-full max-w-[1140px] py-5 mb-10">
-        <Table>
+      {/* Table Container with Responsive Scroll */}
+      <div className="w-full max-w-[1140px] py-5 mb-10 overflow-x-auto">
+        <Table className="min-w-full">
           <TableHeader>
             <TableRow>
               <TableHead className="text-center bg-[#1e3c74] text-white border border-[#1e3c74] py-5 font-semibold">
@@ -135,10 +122,10 @@ export default function MemberList() {
             {getMembers().map((member, index) => (
               <TableRow key={index}>
                 <TableCell className="text-center border py-5">
-                  {member.name}
+                  {member.name || "N/A"}
                 </TableCell>
                 <TableCell className="text-center border py-5">
-                  {member.location}
+                  {member.location || "N/A"}
                 </TableCell>
                 <TableCell className="text-center border py-5">
                   {member.designation}
@@ -148,6 +135,7 @@ export default function MemberList() {
           </TableBody>
         </Table>
       </div>
+
       <Footer />
     </div>
   );

@@ -11,8 +11,13 @@ export default function Apply() {
     email: "",
     phone: "",
     address: "",
-    roles: [] as string[],
+    roles: "",
     message: "",
+  });
+
+  const [errors, setErrors] = useState({
+    email: "",
+    phone: "",
   });
 
   const handleChange = (
@@ -20,21 +25,44 @@ export default function Apply() {
   ) => {
     const { name, value, type } = e.target;
 
-    if (type === "checkbox") {
-      const target = e.target as HTMLInputElement; // Explicitly cast e.target
+    if (type === "radio") {
       setFormData((prevData) => ({
         ...prevData,
-        roles: target.checked
-          ? [...prevData.roles, value] // Add if checked
-          : prevData.roles.filter((role) => role !== value), // Remove if unchecked
+        [name]: value,
       }));
     } else {
       setFormData({ ...formData, [name]: value });
     }
   };
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  };
+
+  const validateBDPhone = (phone: string) => {
+    const bdPhoneRegex = /^(?:\+8801|01)[3-9]\d{8}$/;
+    return bdPhoneRegex.test(phone);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    let newErrors = { email: "", phone: "" };
+
+    if (!validateEmail(formData.email)) {
+      newErrors.email = "Invalid email format";
+    }
+
+    if (!validateBDPhone(formData.phone)) {
+      newErrors.phone = "Phone number must be a valid Bangladeshi number";
+    }
+
+    setErrors(newErrors);
+
+    if (newErrors.email || newErrors.phone) {
+      return; // Stop submission if there are validation errors
+    }
 
     try {
       const response = await fetch("/api/apply", {
@@ -53,9 +81,10 @@ export default function Apply() {
           email: "",
           phone: "",
           address: "",
-          roles: [],
+          roles: "",
           message: "",
         });
+        setErrors({ email: "", phone: "" });
       } else {
         alert(result.error || "Failed to submit application.");
       }
@@ -66,125 +95,142 @@ export default function Apply() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center min-h-screen gap-0 font-[family-name:var(--font-geist-sans)]">
+    <div className="w-full flex flex-col items-center min-h-screen font-[family-name:var(--font-geist-sans)]">
       <Header />
       <MenuBar />
 
-      <section className="w-full flex flex-col justify-between p-6 lg:p-8 bg-[url('/img/blue-bg-pattern.png')] bg-cover bg-center text-white mb-2">
-        <div className="mx-60">
-          <div className="w-full flex justify-center items-center ">
-            <h2 className="text-xl lg:text-5xl font-bold mb-4 text-center text-amber-500">
-              Become a Member/Volunteer
-            </h2>
-          </div>
-          <div>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="flex flex-col lg:flex-row gap-4">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="First Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="h-12 w-full lg:w-1/2 p-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Last Name"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  className="h-12 w-full lg:w-1/2 p-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div className="flex flex-col lg:flex-row gap-4">
+      <section className="w-full flex flex-col justify-between p-4 lg:p-8 bg-[url('/img/blue-bg-pattern.png')] bg-cover bg-center text-white mb-2">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl lg:text-4xl font-bold text-center text-amber-500 mb-6">
+            Become a Member/Volunteer
+          </h2>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Name Fields */}
+            <div className="flex flex-col lg:flex-row gap-4">
+              <input
+                type="text"
+                name="name"
+                placeholder="First Name"
+                value={formData.name}
+                onChange={handleChange}
+                className="h-12 w-full p-3 text-black border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                value={formData.lastName}
+                onChange={handleChange}
+                className="h-12 w-full p-3 text-black border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            {/* Email & Phone */}
+            <div className="flex flex-col lg:flex-row gap-4">
+              <div className="w-full">
                 <input
                   type="email"
                   name="email"
                   placeholder="Email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="h-12 w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className={`h-12 w-full p-3 text-black border border-gray-300 rounded-md focus:ring-2 ${
+                    errors.email ? "border-red-500" : "focus:ring-blue-500"
+                  }`}
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm">{errors.email}</p>
+                )}
+              </div>
+              <div className="w-full">
                 <input
                   type="number"
                   name="phone"
                   placeholder="Phone Number"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="h-12 w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className={`h-12 w-full p-3 text-black border border-gray-300 rounded-md focus:ring-2 ${
+                    errors.phone ? "border-red-500" : "focus:ring-blue-500"
+                  }`}
                 />
+                {errors.phone && (
+                  <p className="text-red-500 text-sm">{errors.phone}</p>
+                )}
               </div>
+            </div>
 
-              <input
-                type="address"
-                name="address"
-                placeholder="Address (ঠিকানা) "
-                value={formData.address}
-                onChange={handleChange}
-                className="h-12 w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+            {/* Address */}
+            <input
+              type="text"
+              name="address"
+              placeholder="Address (ঠিকানা)"
+              value={formData.address}
+              onChange={handleChange}
+              className="h-12 w-full p-3 text-black border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            />
 
-              {/* Radio buttons for roles */}
-              <div className="flex flex-col lg:flex-row gap-4 text-black">
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="radio"
-                    name="roles" // Same name for radio buttons ensures only one can be selected
-                    value="member"
-                    checked={formData.roles.includes("member")}
-                    onChange={handleChange}
-                    className="h-5 w-5"
-                  />
-                  <span
-                    className={`font-bold text-[30px] transition-colors ${
-                      formData.roles.includes("member")
-                        ? "text-yellow-400"
-                        : "text-white"
-                    }`}
-                  >
-                    Apply as a Member
-                  </span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="radio"
-                    name="roles"
-                    value="volunteer"
-                    checked={formData.roles.includes("volunteer")}
-                    onChange={handleChange}
-                    className="h-5 w-5"
-                  />
-                  <span
-                    className={`font-bold text-[30px] transition-colors ${
-                      formData.roles.includes("volunteer")
-                        ? "text-yellow-400"
-                        : "text-white"
-                    }`}
-                  >
-                    Apply as a Volunteer
-                  </span>
-                </label>
-              </div>
-
-              <textarea
-                name="message"
-                placeholder="Write something about yourself. ( আপনার নিজের স্বম্বন্ধে কিছু বলেন ) "
-                value={formData.message}
-                onChange={handleChange}
-                required
-                className="w-full p-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 h-32"
-              />
-              <div className="flex justify-center">
-                <button
-                  type="submit"
-                  className="w-full lg:w-36 h-12 py-2 px-4 bg-slate-100 text-amber-900 font-mono font-bold tracking-widest hover:bg-blue-600 transition"
+            {/* Roles Selection */}
+            <div className="flex flex-col lg:flex-row gap-4 text-black">
+              <label className="flex items-center space-x-2">
+                <input
+                  type="radio"
+                  name="roles"
+                  value="member"
+                  checked={formData.roles === "member"}
+                  onChange={handleChange}
+                  className="h-5 w-5"
+                />
+                <span
+                  className={`font-bold text-xl ${
+                    formData.roles === "member"
+                      ? "text-yellow-400"
+                      : "text-white"
+                  }`}
                 >
-                  SUBMIT
-                </button>
-              </div>
-            </form>
-          </div>
+                  Apply as a Member
+                </span>
+              </label>
+              <label className="flex items-center space-x-2">
+                <input
+                  type="radio"
+                  name="roles"
+                  value="volunteer"
+                  checked={formData.roles === "volunteer"}
+                  onChange={handleChange}
+                  className="h-5 w-5"
+                />
+                <span
+                  className={`font-bold text-xl ${
+                    formData.roles === "volunteer"
+                      ? "text-yellow-400"
+                      : "text-white"
+                  }`}
+                >
+                  Apply as a Volunteer
+                </span>
+              </label>
+            </div>
+
+            {/* Message Box */}
+            <textarea
+              name="message"
+              placeholder="Write something about yourself. (আপনার সম্পর্কে কিছু লিখুন)"
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full p-3 text-black border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 h-32"
+            />
+
+            {/* Submit Button */}
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="w-full lg:w-40 h-12 bg-slate-100 text-amber-900 font-bold tracking-widest hover:bg-blue-600 transition"
+              >
+                SUBMIT
+              </button>
+            </div>
+          </form>
         </div>
       </section>
 
