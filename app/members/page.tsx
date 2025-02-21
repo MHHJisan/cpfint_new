@@ -38,8 +38,12 @@ const exMembers = [
 ];
 
 const volunteerMembers = [
-  { name: "", location: "", designation: "Volunteer Coordinator" },
-  { name: "", location: "", designation: "Event Organizer" },
+  { name: "Rakibul Hayat", location: "", designation: "Volunteer Coordinator" },
+  { name: "Mubarrat Farabee", location: "", designation: "Event Organizer" },
+  { name: "Mahadi Hasan", location: "", designation: "Event Organizer" },
+  { name: "Arafat Hossain", location: "", designation: "Event Organizer" },
+  { name: "Mohammad Ripat", location: "", designation: "Event Organizer" },
+  { name: "Md. Ashrafur Rahman", location: "", designation: "Event Organizer" },
 ];
 
 export default function MemberList() {
