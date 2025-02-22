@@ -99,7 +99,7 @@ export function MenuBar() {
                   Home
                 </a>
               </li>
-              {["About", "Gallery", "Contact"].map((item) => (
+              {["About", "Gallery", "Contact", "Members"].map((item) => (
                 <li key={item}>
                   <a
                     href={`/${item.toLowerCase()}`}
