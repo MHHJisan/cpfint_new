@@ -3,7 +3,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import React from "react";
+import { useEffect, useRef } from "react";
 
 const donationPrograms = [
   {
@@ -41,32 +42,23 @@ export default function DonationPrograms() {
 
   useEffect(() => {
     if (!scrollRef.current) return;
-    const scrollElement = scrollRef.current;
 
-    let scrollSpeed = 0.5;
-    let requestId: number;
-    // let scrollAmount = 0;
+    const scrollContainer = scrollRef.current;
 
-    function scroll() {
-      if (!scrollElement) return;
+    let scrollAmount = 0;
 
-      scrollElement.scrollLeft += scrollSpeed;
+    function smoothScroll() {
+      scrollAmount += 1; //adjust speed by changing this
 
-      if (
-        scrollElement.scrollLeft >=
-        scrollElement.scrollWidth - scrollElement.clientWidth
-      ) {
-        scrollElement.scrollLeft = 0;
+      if (scrollAmount >= scrollContainer.scrollWidth / 2) {
+        scrollAmount = 0; //reset without visible jump
       }
 
-      requestId = requestAnimationFrame(scroll);
+      scrollContainer.scrollLeft = scrollAmount;
+      requestAnimationFrame(smoothScroll);
     }
 
-    requestId = requestAnimationFrame(scroll);
-
-    return () => {
-      cancelAnimationFrame(requestId);
-    };
+    smoothScroll();
   }, []);
 
   return (
@@ -74,7 +66,7 @@ export default function DonationPrograms() {
       {/* Infinite Scrolling Container */}
       <div
         ref={scrollRef}
-        className="flex space-x-6 overflow-x-scoll scrollbar-none"
+        className="relative w-full flex  space-x-6 overflow-hidden scrollbar-none"
       >
         {[...donationPrograms, ...donationPrograms].map((program, index) => (
           <Card
