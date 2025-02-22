@@ -38,12 +38,42 @@ const exMembers = [
 ];
 
 const volunteerMembers = [
-  { name: "Rakibul Hayat", location: "", designation: "Volunteer Coordinator" },
-  { name: "Mubarrat Farabee", location: "", designation: "Event Organizer" },
-  { name: "Mahadi Hasan", location: "", designation: "Event Organizer" },
-  { name: "Arafat Hossain", location: "", designation: "Event Organizer" },
-  { name: "Mohammad Ripat", location: "", designation: "Event Organizer" },
-  { name: "Md. Ashrafur Rahman", location: "", designation: "Event Organizer" },
+  {
+    name: "Rakibul Hayat",
+    location: "Charkakra,Conpanigonj,Noakhali",
+    designation: "Volunteer",
+  },
+  {
+    name: "Mubarrat Farabee",
+    location: "Basurhat Companygonj Noakhali",
+    designation: "Volunteer",
+  },
+  {
+    name: "Mahadi Hasan",
+    location: "চর হাজারী কোম্পানি গন্জ নোয়াখালী",
+    designation: "Volunteer",
+  },
+  {
+    name: "Arafat Hossain",
+    location: "Corhajari Companygonj Noakhali",
+    designation: "Volunteer",
+  },
+  {
+    name: "Mohammad Ripat",
+    location:
+      "Monkaji Bepari Bari, 5 no. Ward, Charhazari, Companigonj, Noakhali",
+    designation: "Volunteer",
+  },
+  {
+    name: "Md. Ashrafur Rahman",
+    location: "HAZARIHAT,COMPANIGONJ,NOAKHALI",
+    designation: "Volunteer",
+  },
+  {
+    name: "JAHIDUL ISLAM",
+    location: "Char hazari companigonj Noakhali",
+    designation: "Volunteer",
+  },
 ];
 
 export default function MemberList() {

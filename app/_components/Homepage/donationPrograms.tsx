@@ -3,7 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const donationPrograms = [
   {
@@ -15,21 +15,21 @@ const donationPrograms = [
   },
   {
     title: "Sewing Machine Giveaway",
-    link: "https://cpfint.org/what-we-do#swing-machine-giveaway",
+    link: "https://cpfint.org/gallery#swing-machine-giveaway",
     image: "/swing_project/swing2.jpg",
     description:
       "In the aftermath of the coronavirus pandemic, we donated 100 sewing machines to the unemployed and poor families.",
   },
   {
     title: "Covid-19 Supply Program",
-    link: "https://cpfint.org/what-we-do#covid-19-supply-program",
+    link: "https://cpfint.org/gallery#covid-19-supply-program",
     image: "/COVID-19/atd5.jpg",
     description:
       "Through our volunteers, we provided food and hygiene items such as masks and sanitizing products to more than 600 individuals during Covid 19.",
   },
   {
     title: "Ramadan Supply Program",
-    link: "https://cpfint.org/what-we-do#ramadan-supply-program",
+    link: "https://cpfint.org/gallery#ramadan-supply-program",
     image: "/iftar_distribution-2023/File_000.png",
     description:
       "During Ramadan (Year), by the grace of almighty Allah we have provided meals and other family essentials to more than 650 people.",
@@ -37,12 +37,45 @@ const donationPrograms = [
 ];
 
 export default function DonationPrograms() {
-  const [isPaused, setIsPaused] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!scrollRef.current) return;
+    const scrollElement = scrollRef.current;
+
+    let scrollSpeed = 0.5;
+    let requestId: number;
+    // let scrollAmount = 0;
+
+    function scroll() {
+      if (!scrollElement) return;
+
+      scrollElement.scrollLeft += scrollSpeed;
+
+      if (
+        scrollElement.scrollLeft >=
+        scrollElement.scrollWidth - scrollElement.clientWidth
+      ) {
+        scrollElement.scrollLeft = 0;
+      }
+
+      requestId = requestAnimationFrame(scroll);
+    }
+
+    requestId = requestAnimationFrame(scroll);
+
+    return () => {
+      cancelAnimationFrame(requestId);
+    };
+  }, []);
 
   return (
     <div className="relative w-full overflow-hidden bg-transparent p-6">
       {/* Infinite Scrolling Container */}
-      <div className="flex space-x-6 animate-scroll">
+      <div
+        ref={scrollRef}
+        className="flex space-x-6 overflow-x-scoll scrollbar-none"
+      >
         {[...donationPrograms, ...donationPrograms].map((program, index) => (
           <Card
             key={index}
