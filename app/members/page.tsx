@@ -15,16 +15,16 @@ import { useRouter } from "next/navigation";
 import { Footer } from "../_components/footer";
 
 const members = [
-  { name: "Fakru Uddin", location: "Texas, USA", designation: "President" },
+  { name: "Fakru Uddin", location: "Texas, USA", designation: "" },
   {
     name: "Showkat Hayat Khan Biplob",
     location: "Paris, France",
-    designation: "Vice President",
+    designation: "",
   },
   {
     name: "Abdul Qayum Mamun",
     location: "Rome, Italy",
-    designation: "General Secretary",
+    designation: "",
   },
 ];
 
