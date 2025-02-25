@@ -79,6 +79,11 @@ const volunteerMembers = [
     location: "Char hazari companigonj Noakhali",
     designation: "Volunteer",
   },
+  {
+    name: " Mosharraf Hosen",
+    location: "Charparboti 2 no word",
+    designation: "Volunteer",
+  },
 ];
 
 export default function MemberList() {
