@@ -84,6 +84,11 @@ const volunteerMembers = [
     location: "Charparboti 2 no word",
     designation: "Volunteer",
   },
+  {
+    name: "Imran Hossen Rony",
+    location: "charhazari, hazarihat, companigonj, noakhali.",
+    designation: "Volunteer",
+  },
 ];
 
 export default function MemberList() {
